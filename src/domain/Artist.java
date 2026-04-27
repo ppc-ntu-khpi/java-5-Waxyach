@@ -1,43 +1,79 @@
 package domain;
 
+/**
+ * Представляє працівника творчої спеціальності.
+ * Містить список професійних навичок.
+ */
 public class Artist extends Employee {
 
-    public Artist(String[] skiils, String name, String jobTitle, int level, String dept) {
+    private String[] skills;
+
+    /**
+     * Instantiates a new Artist.
+     *
+     * @param skills   the skills
+     * @param name     the name
+     * @param jobTitle the job title
+     * @param level    the level
+     * @param dept     the dept
+     */
+    public Artist(String[] skills, String name, String jobTitle, int level, String dept) {
         super(name, jobTitle, level, dept);
-        this.skiils = skiils;
+        this.skills = skills;
     }
 
-    public Artist(String[] skiils) {
+    /**
+     * Instantiates a new Artist.
+     *
+     * @param skills the skills
+     */
+    public Artist(String[] skills) {
         super();
-        this.skiils = skiils;
+        this.skills = skills;
     }
-    
+
+    /**
+     * Instantiates a new Artist.
+     */
     public Artist() {
         super();
-        this.skiils = new String[10];
+        this.skills = new String[10];
+    }
+
+    /**
+     * Sets skills.
+     *
+     * @param skills skills
+     */
+    public void setSkills(String[] skills) {
+        this.skills = skills;
+    }
+
+    /**
+     * Повертає список навичок у вигляді рядка, розділеного комами.
+     *
+     * @return Рядок навичок. Може виникнути помилка, якщо масив порожній (через substring).
+     */
+    public String getSkills() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String skill : skills) {
+            stringBuilder.append(skill).append(", ");
+        }
+        stringBuilder = new StringBuilder(stringBuilder.substring(0, stringBuilder.length() - 2));
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Get skills list string [ ].
+     *
+     * @return the string [ ]
+     */
+    public String[] getSkillsList() {
+        return skills;
     }
 
     @Override
     public String toString() {
-        return super.toString()+"\nSkills: "+getSkills();
-    }
-
-    private String[] skiils;
-
-    public String getSkills() {
-        String s = "";
-        for (String e : skiils) {
-            s = s + e + ", ";
-        }
-       s=s.substring(0, s.length() - 2);
-        return s;
-    }
-
-    public void setSkills(String[] skills) {
-        this.skiils=skills;
-    }
-
-    public String[] getSkillsLSist() {
-        return skiils;
+        return super.toString() + "\nSkills: " + getSkills();
     }
 }

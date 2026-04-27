@@ -1,3 +1,6 @@
 package domain;
-public class TechnicalWriter extends Artist {
-}
+
+/**
+ * Технічний письменник.
+ */
+public class TechnicalWriter extends Artist { }
