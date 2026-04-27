@@ -1,3 +1,6 @@
 package domain;
-public class GraphicIllustrator extends Artist {
-}
+
+/**
+ * Спеціаліст із графічної ілюстрації.
+ */
+public class GraphicIllustrator extends Artist { }

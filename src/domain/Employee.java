@@ -1,95 +1,123 @@
 package domain;
+
+/**
+ * Базовий клас, що описує працівника компанії.
+ */
 public class Employee {
 
-    @Override
-    public String toString() {
-        return "\nEmployee ID= " + ID + "\nName= " + name + "\nJobTitle= " + jobTitle + "\nLevel= " + level + "\nDept= " + dept;
-    }
+    private static final String NAME_REGEX = "^([a-zA-Z]+[',.\\-]?[a-zA-Z ]*)+ ([a-zA-Z]+[',.\\-]?[a-zA-Z ]+)+$";
 
-    private String name;
-    private String jobTitle;
-    private int ID;
+    private final int id;
+
+    private String name, jobTitle, dept;
+
     private int level;
-    private String dept;
 
-   // private static int employeesCount = 0;
-
+    /**
+     * Instantiates a new Employee.
+     *
+     * @param name     the name
+     * @param jobTitle the job title
+     * @param level    the level
+     * @param dept     the dept
+     */
     public Employee(String name, String jobTitle, int level, String dept) {
         this();
+
         setName(name);
-        this.jobTitle = jobTitle;
-        switch (level) {
-            case 1:
-            case 2:
-            case 3:
-                this.level = level;
-                break;
-            default:
-                this.level = 1;
-        }
-        this.dept = dept;
+        setJobTitle(jobTitle);
+        setLevel(level);
+        setDept(dept);
     }
 
+    /**
+     * Instantiates a new Employee.
+     */
     public Employee() {
-        ID = (int)(Math.random()*1000);
-//        if (ID > 10000) {
-//            throw new NumberFormatException("ERROR! Employee's ID cannot be greater than 10000. Employee is not created!");
-//        }
+        this.id = (int) (Math.random() * 1000);
     }
 
+    /**
+     * Sets job title.
+     *
+     * @param job the job
+     */
     public void setJobTitle(String job) {
         jobTitle = job;
     }
 
+    /**
+     * Gets job title.
+     *
+     * @return the job title
+     */
     public String getJobTitle() {
         return jobTitle;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setLevel(int level) {
-        switch (level) {
-            case 1:
-            case 2:
-            case 3:
-                this.level = level;
-                break;
-            default:
-                this.level = 1;
-        }
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public String getDept() {
-        return dept;
-    }
-
-    public void setDept(String dept) {
-        this.dept = dept;
-    }
-
+    /**
+     * Встановлює ім'я працівника.
+     *
+     * @param name Має відповідати формату "Ім'я Прізвище" (через регулярний вираз). Якщо валідація не пройдена, встановлюється значення за замовчуванням "John Doe".
+     */
     public void setName(String name) {
-//        boolean correctName = true;
-//        for (int i = 0; i < name.length(); i++) {
-//            char s = name.charAt(i);
-//            if (Character.isDigit(s)) {
-//                correctName = false;
-//            }
-//        }
-//        if (correctName) {
-//            this.name = name;
-//        } else {
-//            this.name = "John Doe";
-//        }
-        if (name.matches("^([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]*)+[ ]([a-zA-Z]+[\\'\\,\\.\\-]?[a-zA-Z ]+)+$")) {
+        if (name.matches(NAME_REGEX)) {
             this.name = name;
         } else {
             this.name = "John Doe";
         }
+    }
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Встановлює рівень кваліфікації.
+     *
+     * @param level Дозволені значення: 1, 2, 3. Будь-яке інше значення скидає рівень до 1.
+     */
+    public void setLevel(int level) {
+        this.level = switch (level) {
+            case 1, 2, 3 -> level;
+            default ->  1;
+        };
+    }
+
+    /**
+     * Gets level.
+     *
+     * @return the level
+     */
+    public int getLevel() {
+        return level;
+    }
+
+    /**
+     * Sets dept.
+     *
+     * @param dept the dept
+     */
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
+
+    /**
+     * Gets dept.
+     *
+     * @return the dept
+     */
+    public String getDept() {
+        return dept;
+    }
+
+    @Override
+    public String toString() {
+        return "\nEmployee ID= " + id + "\nName= " + name + "\nJobTitle= " + jobTitle + "\nLevel= " + level + "\nDept= " + dept;
     }
 }
